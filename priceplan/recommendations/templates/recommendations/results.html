@@ -1,0 +1,82 @@
+{% extends "recommendations/layout.html" %}
+
+{% block title %}Recommended Plans{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>Your Input Plan</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Day Mins</th>
+                    <th>Day Calls</th>
+                    <th>Day Charge</th>
+                    <th>Eve Mins</th>
+                    <th>Eve Calls</th>
+                    <th>Eve Charge</th>
+                    <th>Night Mins</th>
+                    <th>Night Calls</th>
+                    <th>Night Charge</th>
+                    <th>Intl Mins</th>
+                    <th>Intl Calls</th>
+                    <th>Intl Charge</th>
+                    <th>Total Charge</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for value in input_plan %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                    <td>{{ input_total_charge }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Recommended Plans</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Day Mins</th>
+                    <th>Day Calls</th>
+                    <th>Day Charge</th>
+                    <th>Eve Mins</th>
+                    <th>Eve Calls</th>
+                    <th>Eve Charge</th>
+                    <th>Night Mins</th>
+                    <th>Night Calls</th>
+                    <th>Night Charge</th>
+                    <th>Intl Mins</th>
+                    <th>Intl Calls</th>
+                    <th>Intl Charge</th>
+                    <th>Total Charge</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, row in recommended_plans.iterrows %}
+                <tr class="{% if row.Total_Charge < input_total_charge %}table-success{% else %}table-danger{% endif %}">
+                    <td>{{ index|add:1 }}</td>
+                    <td>{{ row.Day_Mins }}</td>
+                    <td>{{ row.Day_Calls }}</td>
+                    <td>{{ row.Day_Charge }}</td>
+                    <td>{{ row.Eve_Mins }}</td>
+                    <td>{{ row.Eve_Calls }}</td>
+                    <td>{{ row.Eve_Charge }}</td>
+                    <td>{{ row.Night_Mins }}</td>
+                    <td>{{ row.Night_Calls }}</td>
+                    <td>{{ row.Night_Charge }}</td>
+                    <td>{{ row.Intl_Mins }}</td>
+                    <td>{{ row.Intl_Calls }}</td>
+                    <td>{{ row.Intl_Charge }}</td>
+                    <td>{{ row.Total_Charge }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
